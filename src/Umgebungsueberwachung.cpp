@@ -9,14 +9,14 @@ double limit_mem = 36;
 double safety_dist_factor = 6;
 
 
-/*Für Querregler*/
+/*FÃ¼r Querregler*/
 paraQuer distOutput;
 double angOutput;
 double lanemid = 0;
 
 Querregler_dist qd_regler(lanemid);
 Querregler_ang qa_regler;
-//Als Eingabe für Methode spur_wechsel
+//Als Eingabe fÃ¼r Methode spur_wechsel
 //int change_lane_counter = 0;
 //int prev_change_lane_counter = 0;
 //int wechsel = 0;
@@ -146,10 +146,10 @@ void Umgebungsueberwachung::Moduswahl(double sim_time, int soll_wechsel, double 
 	}
 	else {
 		double front_obj_v = ObjByLane[0].Lane[1][0].ObjFront[0].VelLong;   //die Geschwindigkeit des vorausfahrenden Fahrzeugs
-		if (front_obj_v > limit) {              //falls das vorausfahrende Fahrzeug schneller als das Limit fährt
+		if (front_obj_v > limit) {              //falls das vorausfahrende Fahrzeug schneller als das Limit fÃ¤hrt
 			aktiver_regler = 0;                 //Geschwindigkeitsregler Regler aktiv
 		}
-		else {                                   //falls voraufahrendes Fahrzeug langsamer als das Limit fährt
+		else {                                   //falls voraufahrendes Fahrzeug langsamer als das Limit fÃ¤hrt
 			aktiver_regler = 1;                  // Folgefahrt -> Abstandsregler aktiv
 		}
     sens_data.aktiver_regler = aktiver_regler;
@@ -178,7 +178,7 @@ void Umgebungsueberwachung::Moduswahl(double sim_time, int soll_wechsel, double 
 
             }
         }
-        else if (Vehicle.v * safety_dist_factor > ObjByLane[0].Lane[1][0].ObjFront[0].sMin && ObjByLane[0].Lane[1][0].ObjFront[0].VelLong < limit - 10 / 3.6 && ObjByLane[0].Lane[1][0].nObjF != 0 && change_lane == false && ObjByLane[0].Lane[0][0].Type == 0) {        //lansgam fahrendes Auto erkannt 10kmh langsamer -> links überholen (wenn möglich)
+        else if (Vehicle.v * safety_dist_factor > ObjByLane[0].Lane[1][0].ObjFront[0].sMin && ObjByLane[0].Lane[1][0].ObjFront[0].VelLong < limit - 10 / 3.6 && ObjByLane[0].Lane[1][0].nObjF != 0 && change_lane == false && ObjByLane[0].Lane[0][0].Type == 0) {        //lansgam fahrendes Auto erkannt 10kmh langsamer -> links Ã¼berholen (wenn mÃ¶glich)
             //Log("Langsames Auto erkannt \n");
             //links ueberholen
             if ((Vehicle.v * safety_dist_factor < ObjByLane[0].Lane[0][0].ObjFront[0].sMin || ObjByLane[0].Lane[0][0].nObjF == 0) && (Vehicle.v * safety_dist_factor < abs(ObjByLane[0].Lane[0][0].ObjRear[0].sMin) || ObjByLane[0].Lane[0][0].nObjR == 0)) {
@@ -187,7 +187,7 @@ void Umgebungsueberwachung::Moduswahl(double sim_time, int soll_wechsel, double 
                 Log("Links ueberholen einleiten. \n");
             }
         }
-        else if (change_lane == false && change_lane_counter != 0) {          //kein Hindernis/langsames Auto erkannt -> zurück in Ausgangsspur wechseln (wenn möglich)
+        else if (change_lane == false && change_lane_counter != 0) {          //kein Hindernis/langsames Auto erkannt -> zurÃ¼ck in Ausgangsspur wechseln (wenn mÃ¶glich)
             //Log("Kein Objekt erkannt");
             //Log("front dist: %lf , rear dist: %lf \n", ObjByLane[0].Lane[2][0].ObjFront[0].sMin, abs(ObjByLane[0].Lane[2][0].ObjRear[0].sMin));
             if ((Vehicle.v * safety_dist_factor < ObjByLane[0].Lane[0][0].ObjFront[0].sMin || ObjByLane[0].Lane[0][0].nObjF == 0) && (Vehicle.v * safety_dist_factor < abs(ObjByLane[0].Lane[0][0].ObjRear[0].sMin) || ObjByLane[0].Lane[0][0].nObjR == 0) && change_lane_counter > 0 ) {
@@ -203,7 +203,7 @@ void Umgebungsueberwachung::Moduswahl(double sim_time, int soll_wechsel, double 
         }
     }
     regler_aufruf(sim_time);
-	//bedingungen für Spurwechsel überprüfen, regler aufrufen
+	//bedingungen fÃ¼r Spurwechsel Ã¼berprÃ¼fen, regler aufrufen
 }
 
 
@@ -224,7 +224,7 @@ void Umgebungsueberwachung::regler_aufruf(double sim_time) {
             double soll_v_diff = dist_regler_output.sum_out;
 
             //Log("Measured speed of car in front: %lf \n", Obj_v);
-            double soll_v = Obj_v - soll_v_diff;                       //Berechnung der Sollgeschwindigkeit mit der Stellgröße des Abstandsreglers
+            double soll_v = Obj_v - soll_v_diff;                       //Berechnung der Sollgeschwindigkeit mit der StellgrÃ¶ÃŸe des Abstandsreglers
             va_regler.set_sollwert(soll_v);                             
             //Log("Vom Abstandsregler bestimmer Gerschwindigkeits-Sollwert: %lf \n", soll_v);
             sens_data.regler_values = va_regler.geschwindigkeitsRegelung();                       //Aufruf des Geschwindigkeitsreglers
@@ -259,9 +259,9 @@ void Umgebungsueberwachung::regler_aufruf(double sim_time) {
     wechsel = get_wechsel();    //Parameter wechsel wird aktualisiert
 
     sens_data.turn_max_speed = distOutput.geschwindigkeit;
-    v_regler.set_sollwert_max(distOutput.geschwindigkeit);    //maximale Geschwindigkeit für v_regler festlegen
-    va_regler.set_sollwert_max(distOutput.geschwindigkeit);   //maximale Geschwindigkeit für va_regler festlegen
-    v_regler.set_sollwert(distOutput.geschwindigkeit);        //Während Freifahrt wird hier der Sollwert für die Geschwindigkeit gesetzt
+    v_regler.set_sollwert_max(distOutput.geschwindigkeit);    //maximale Geschwindigkeit fÃ¼r v_regler festlegen
+    va_regler.set_sollwert_max(distOutput.geschwindigkeit);   //maximale Geschwindigkeit fÃ¼r va_regler festlegen
+    v_regler.set_sollwert(distOutput.geschwindigkeit);        //WÃ¤hrend Freifahrt wird hier der Sollwert fÃ¼r die Geschwindigkeit gesetzt
    
     
 }
