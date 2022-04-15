@@ -19,7 +19,7 @@ public:
 	* Der Output des Regelalgorithmus ist eine Soll-Geschwindigkeit in [m/s].
 	* 
 	*
-	* @return	retVals: Die P, I, und D Anteile des Reglers werden fuer Debugging/Reglereinstellung zurueckgegeben, die Summe wird fuer den Geschwindigkeitsregler benötigt \n
+	* @return	retVals: Die P, I, und D Anteile des Reglers werden fuer Debugging/Reglereinstellung zurueckgegeben, die Summe wird fuer den Geschwindigkeitsregler benÃ¶tigt \n
 	*/
 	retVals abstandsRegelung(double dist, double Obj_v, double safety_dist_factor);
 
@@ -36,7 +36,7 @@ public:
 	* @brief Berechnung des Regelalgorithmus \n
 	* 
 	* @param[in] istwert: Der Ist-Abstand.
-	* @return	retVals: Die P, I, und D Anteile des Reglers werden fuer Debugging/Reglereinstellung zurueckgegeben, die Summe wird fuer den Geschwindigkeitsregler benötigt \n
+	* @return	retVals: Die P, I, und D Anteile des Reglers werden fuer Debugging/Reglereinstellung zurueckgegeben, die Summe wird fuer den Geschwindigkeitsregler benÃ¶tigt \n
 	*/
 
 	retVals regel_algo(double istwert);
