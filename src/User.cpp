@@ -128,9 +128,9 @@ double dist;
 //double curr_gas = 0.0;
 //double curr_brake = 0.0;
 
-/*Für Querregler*/
+/*FÃ¼r Querregler*/
 //paraQuer distOutput;
-/*Als Eingabe für Methode spur_wechsel*/
+/*Als Eingabe fÃ¼r Methode spur_wechsel*/
 //int change_lane_counter = 0;
 //int prev_change_lane_counter = 0;
 
